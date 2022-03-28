@@ -1,0 +1,398 @@
+version: 2
+
+models:
+  - name: stg_account
+    columns:
+      - name: account_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+      - name: district_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_district')
+              field: district_id
+      - name: stmt_frq
+        description: ""
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - weekly
+                - monthly
+                - after_tr
+      - name: date
+        description: ""
+  - name: stg_base_card
+    columns:
+      - name: card_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+      - name: disp_id
+        description: ""
+      - name: type
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_card_type_facts')
+              field: type
+      - name: date
+        description: ""
+        tests:
+          - not_null
+      - name: end_date
+        description: ""
+      - name: card_number
+        description: ""
+
+  - name: stg_card
+    columns:
+      - name: index
+        description: ""
+      - name: card_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+      - name: disp_id
+        description: ""
+      - name: type
+        description: ""
+        tests:  
+          - not_null
+          - relationships:
+              to: ref('stg_card_type_facts')
+              field: type
+      - name: card_number
+        description: ""
+      - name: date
+        description: ""
+        tests:
+          - not_null
+      - name: end_date
+        description: ""
+
+  - name: stg_card_payment_amounts
+    columns:
+      - name: index
+        description: ""
+      - name: period_transactions_total
+        description: ""
+      - name: card_number
+        description: ""
+      - name: is_full_payer
+        description: ""
+      - name: payment_type
+        description: ""
+      - name: balance_percent
+        description: ""
+      - name: card_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_card')
+              field: card_id
+      - name: remaining_balance_last_period
+        description: ""
+      - name: total_amount_owed
+        description: ""
+      - name: total_amount_paid
+        description: ""
+      - name: total_interest_applied
+        description: ""
+      - name: remaining_balance_this_period
+        description: ""
+      - name: period_start
+        description: ""
+      - name: period_end
+        description: ""
+      - name: payment_completed_date
+        description: ""
+      - name: payment_due_date
+        description: ""
+
+  - name: stg_card_transactions
+    columns:
+      - name: cc_number
+        description: ""
+        tests:
+          - not_null
+      - name: trans_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+      - name: trans_time
+        description: ""
+        tests:
+          - not_null
+      - name: epoch_time
+        description: ""
+        tests:
+          - not_null
+      - name: category
+        description: ""
+        tests:
+          - accepted_values:
+              values:
+                - misc_net
+                - shopping_pos
+                - gas_transport
+                - shopping_net
+                - health_fitness
+                - kids_pets
+                - entertainment
+                - personal_care
+                - misc_pos
+                - food_dining
+                - grocery_net
+                - travel
+                - home
+                - grocery_pos
+      - name: merchant
+        description: ""
+        tests:
+          - not_null
+      - name: merchant_lat
+        description: ""
+        tests:
+          - not_null
+      - name: merchant_lon
+        description: ""
+        tests:
+          - not_null
+      - name: amount
+        description: ""
+        tests:
+          - not_null
+      - name: is_fraud
+        description: ""
+        tests:
+          - not_null
+      - name: trans_date
+        description: ""
+        tests:
+          - not_null
+
+  - name: stg_card_type_facts
+    columns:
+      - name: type
+        description: ""
+        tests:
+          - accepted_values:
+              values:
+                - classic
+                - junior
+                - classic2
+                - junior2
+                - gold
+      - name: daily_interest_rate
+        description: ""
+        tests:
+          - not_null
+      - name: annual_fee
+        description: ""
+        tests:
+          - not_null
+
+  - name: stg_client
+    columns:
+      - name: ssn
+        description: "Social Security Number"
+        tests:
+          - unique
+          - not_null
+      - name: first_name
+        description: ""
+        tests:
+          - not_null
+      - name: last_name
+        description: ""
+        tests:
+          - not_null
+      - name: gender
+        description: ""
+        tests:
+          - accepted_values:
+              values:
+                - M
+                - F
+      - name: street
+        description: ""
+        tests:
+          - not_null
+      - name: address
+        description: ""
+        tests:
+          - not_null
+      - name: job
+        description: ""
+        tests:
+          - not_null
+      - name: profile
+        description: ""
+        tests:
+          - accepted_values:
+              values:
+                - adults_2550_male_rural
+                - adults_2550_male_urban
+                - adults_50up_male_urban
+                - young_adults_male_rural
+                - young_adults_male_urban
+                - adults_2550_female_rural
+                - adults_2550_female_urban
+                - adults_50up_female_urban
+                - young_adults_female_urban
+                - adults_50up_male_rural
+                - adults_50up_female_rural
+                - young_adults_female_rural
+      - name: client_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+      - name: district_id
+        description: ""
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_district')
+              field: district_id
+      - name: disp_id
+        description: ""
+      - name: traffice_source
+        description: ""
+        tests:
+          - accepted_values:
+              values:
+                - Email
+                - Mailer
+                - Website
+                - Call Center
+                - Third Party Advertisement
+      - name: dob
+        description: ""
+        tests:
+          - not_null
+      - name: age
+        description: ""
+        tests:
+          - not_null
+
+  - name: stg_disp
+    columns:
+      - name: disp_id
+        description: "Disponent ID"
+      - name: client_id
+        description: "Client ID"
+      - name: account_id
+        description: "Account ID"
+      - name: type
+        description: "Owner or Disponent"
+
+  - name: stg_district
+    columns:
+      - name: district_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+      - name: pop
+        description: ""
+      - name: nmu500
+        description: ""
+      - name: nmu2k
+        description: ""
+      - name: nmu10k
+        description: ""
+      - name: nmuinf
+        description: ""
+      - name: ncit
+        description: ""
+      - name: rurba
+        description: ""
+      - name: avgsal
+        description: ""
+      - name: urat95
+        description: ""
+      - name: urat96
+        description: ""
+      - name: ent_ppt
+        description: ""
+      - name: ncri95
+        description: ""
+      - name: ncri96
+        description: ""
+      - name: city
+        description: ""
+      - name: state
+        description: ""
+      - name: zipcode
+        description: ""
+
+  - name: stg_loan
+    columns:
+      - name: loan_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        description: ""
+        tests:
+          - not_null
+      - name: duration
+        description: ""
+        tests:
+          - not_null
+      - name: payments
+        description: ""
+        tests:
+          - not_null
+      - name: status
+        description: ""
+        tests:
+          - not_null
+      - name: amount
+        description: ""
+        tests:
+          - not_null
+      - name: date
+        description: ""
+        tests:
+          - not_null
+
+  - name: stg_order
+    columns:
+      - name: order_id
+        description: ""
+        tests:
+          - unique
+          - not_null
+      - name: account_id
+        description: ""
+        tests:
+          - relationships:
+              to: ref('stg_account')
+              field: account_id
+      - name: bank_to
+        description: ""
+        tests:
+          - not_null
+      - name: account_to
+        description: ""
+        tests:
+          - not_null
+      - name: category
+        description: ""
+      - name: amount
+        description: ""
+        tests:
+          - not_null

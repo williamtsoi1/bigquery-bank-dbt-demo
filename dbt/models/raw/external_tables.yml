@@ -1,0 +1,85 @@
+version: 2
+
+sources:
+  - name: raw
+    loader: gcloud storage
+    tables:
+      - name: ext_account
+        description: ""
+        external:
+          location: 'gs://williamtsoi-bigquery-bank-demo/data/account'
+          options:
+            format: csv
+            skip_leading_rows: 1
+      - name: ext_base_card
+        description: ""
+        external:
+          location: 'gs://williamtsoi-bigquery-bank-demo/data/base_card'
+          options:
+            format: csv
+            skip_leading_rows: 1
+      - name: ext_card
+        description: ""
+        external:
+          location: 'gs://williamtsoi-bigquery-bank-demo/data/card'
+          options:
+            format: csv
+            skip_leading_rows: 1
+      - name: ext_card_payment_amounts
+        description: ""
+        external:
+          location: 'gs://williamtsoi-bigquery-bank-demo/data/card_payment_amounts'
+          options:
+            format: csv
+            skip_leading_rows: 1
+      - name: ext_card_transactions
+        description: ""
+        external:
+          location: 'gs://williamtsoi-bigquery-bank-demo/data/card_transactions'
+          options:
+            format: csv
+            skip_leading_rows: 1
+      - name: ext_card_type_facts
+        description: ""
+        external:
+          location: 'gs://williamtsoi-bigquery-bank-demo/data/card_type_facts'
+          options:
+            format: csv
+            skip_leading_rows: 1
+      - name: ext_client
+        description: ""
+        external:
+          location: 'gs://williamtsoi-bigquery-bank-demo/data/client'
+          options:
+            format: csv
+            skip_leading_rows: 1
+      - name: ext_district
+        description: ""
+        external:
+          location: 'gs://williamtsoi-bigquery-bank-demo/data/district'
+          options:
+            format: csv
+            skip_leading_rows: 1
+      - name: ext_loan
+        description: ""
+        external:
+          location: 'gs://williamtsoi-bigquery-bank-demo/data/loan'
+          options:
+            format: csv
+            skip_leading_rows: 1
+      - name: ext_disp
+        description: ""
+        external:
+          location: 'gs://williamtsoi-bigquery-bank-demo/data/disp'
+          options:
+            format: csv
+            skip_leading_rows: 1
+      - name: ext_order
+        description: ""
+        external:
+          location: 'gs://williamtsoi-bigquery-bank-demo/data/order'
+          options:
+            format: csv
+            skip_leading_rows: 1
+
+
