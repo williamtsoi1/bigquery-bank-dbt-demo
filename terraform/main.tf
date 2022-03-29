@@ -20,3 +20,9 @@ resource "google_project_service" "bigquery" {
     service = "bigquery.googleapis.com"
     disable_dependent_services = true
 }
+
+resource "google_project_service" "datacatalog" {
+    project = google_project.my_project.project_id
+    service = "datacatalog.googleapis.com"
+    disable_dependent_services = true
+}
