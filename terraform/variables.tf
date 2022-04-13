@@ -9,3 +9,7 @@ variable "bigquery_location" {
 variable "billing_account_id" {
     description = "Billing Account ID"
 }
+
+variable "terraform_user" {
+    description = "IAM User that is running Terraform"
+}

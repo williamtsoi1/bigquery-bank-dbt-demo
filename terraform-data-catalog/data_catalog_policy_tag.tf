@@ -1,6 +1,4 @@
-provider "google-beta" {
-  project     = "${var.project_prefix}-${random_id.project.hex}"
-}
+
 
 resource "google_data_catalog_policy_tag" "pii" {
   provider = google-beta
@@ -59,11 +57,12 @@ resource "google_data_catalog_policy_tag" "child_policy5" {
 
 resource "google_data_catalog_taxonomy" "bigquery_bank" {
   provider = google-beta
-  region = var.bigquery_location
-  project = google_project.my_project.project_id
-  display_name =  "BigQuery Bank"
+  region = var.datacatalog_location
+  display_name =  "BigQuery Bank ${random_id.taxonomy.hex}"
   description = "Policy tags for BigQuery Bank"
-  # activated_policy_types = ["FINE_GRAINED_ACCESS_CONTROL"]
+  activated_policy_types = [
+    # "FINE_GRAINED_ACCESS_CONTROL"
+  ]
 
   depends_on = [
     google_project_service.datacatalog,

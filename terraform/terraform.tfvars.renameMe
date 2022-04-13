@@ -1,3 +1,4 @@
 project_prefix = "bigquery-dbt-bank"
 billing_account_id = ""
-bigquery_location = "us-central1"
+bigquery_location = "US"
+terraform_user = "me@google.com"
