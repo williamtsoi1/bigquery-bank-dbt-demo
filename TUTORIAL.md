@@ -58,6 +58,7 @@ The file should be in this format, the fields to fill in are quite self-explanat
 project_prefix = "bigquery-dbt-bank"
 billing_account_id = ""
 bigquery_location = "US"
+datacatalog_location = "us-central1"
 ```
 
 When you have finished editing this file, save a copy of this file as `terraform.tfvars` within the terraform directory.
